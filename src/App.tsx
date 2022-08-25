@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import './App.css';
-import {Header} from "./site/Header";
 import {Body} from "./site/Body";
 import {Footer} from "./site/Footer";
 // import NewComponent from "./Components/NewComponent";
 import {Button} from "./Components/Button";
 import {NewComponent, NewComponentCars} from "./Components/NewComponent";
+import {FullInput} from "./Components/FullInput";
+import {Input} from "./Components/Input";
+import {ButtonInput} from "./Components/ButtonInput";
 
 function App() {
 
@@ -129,24 +131,53 @@ function App() {
 // */}
         // </>
     // );
-const students = [
-    {id:1, name: 'Joan', age: 8},
-    {id:2, name: 'Jonny', age: 18},
-    {id:3, name: 'Mery', age: 38},
-]
-        const topCars = [
-            {manufacturer: 'BMW', model: 'm5cs'},
-            {manufacturer: 'Mercedes', model: 'e63s'},
-            {manufacturer: 'Audi', model: 'rs6'}
-        ]
+// const students = [
+//     {id:1, name: 'Joan', age: 8},
+//     {id:2, name: 'Jonny', age: 18},
+//     {id:3, name: 'Mery', age: 38},
+// ]
+//     const topCars = [
+//             {manufacturer: 'BMW', model: 'm5cs'},
+//             {manufacturer: 'Mercedes', model: 'e63s'},
+//             {manufacturer: 'Audi', model: 'rs6'}
+//         ]
+let [message, setMessage] = useState([
+    {message: 'message1'},
+    {message: 'message2'},
+    {message: 'message3'},
+])
+
+    let addMessageInTitle = (title: string) => {
+/*        console.log(title)
+        let newMessage = {message: 'messageNew'}
+        setMessage([newMessage, ...message])*/
+        let newMessage = {message: title}
+        setMessage([newMessage, ...message])
+
+    }
+    let [title, setTitle] = useState('')
+    console.log(title)
+ const callBackButtonHandler = () => {
+    addMessageInTitle(title)
+     setTitle('')
+ }
 
 return (
     <>
-        <Header title={'Im header'}/>
-        <Body titleForBody={'Im body'}/>
-        <Footer titleForFooter={'Im footer'}/>
-        <NewComponent students={students}/>
-        <NewComponentCars cars={topCars}/>
+        {/*<Header title={'Im header'}/>*/}
+        {/*<Body titleForBody={'Im body'}/>*/}
+        {/*<Footer titleForFooter={'Im footer'}/>*/}
+        {/*<NewComponent students={students}/>*/}
+        {/*<NewComponentCars cars={topCars}/>*/}
+        {/*<FullInput addMessageInTitle={addMessageInTitle}/>*/}
+        <Input setTitle={setTitle} title={title}/>
+        <ButtonInput name={'+'} callBack= {callBackButtonHandler}/>
+
+        {message.map((el, index) => {
+            return (
+                <div key={index}>{el.message}</div>
+            )
+        })}
     </>
     )
 }
